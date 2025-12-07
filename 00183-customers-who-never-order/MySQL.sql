@@ -1,3 +1,3 @@
-SELECT name AS Customers 
-FROM Customers
-WHERE id NOT IN (SELECT customerId FROM Orders);
+-- MySQL Solution for Customers Who Never Order
+
+/* ... */
