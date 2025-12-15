@@ -2,60 +2,48 @@
 # User Activity
 
 ## 🔍 Problem Summary
-(High-level restatement of the problem in natural language.)
+Find the daily active user count for a period of 30 days ending on 2019-07-27 (inclusive).
+
+A user is considered active on a day if they performed at least one activity from: ('open_session', 'end_session', 'scroll_down', 'send_message')
+
 
 ---
 
-# ✅ 解法 1：Baseline Solution（直覺）
+# ✅ 解法 1：BETWEEN
 
 ### ✔ 思路
-(Explain intuitive approach.)
+Use BETWEEN and notice that the date is used because BETWEEN operator is inclusive, that is both of the begin and the end are included.
 
-### ✔ Time Complexity
-O(N log N) / O(N + M) depending on JOIN / sort.
+### ✔ 主要技巧
+- BETWEEN: 直接比日期值，且包含起訖點，可讀性高
+- COUNT(DISTINCT ) & GROUP BY
+- DATE_SUB()
 
-### ✔ Space Complexity
-O(1) / O(N) depending on window function or join buffers.
+### ✔ Time Complexity: O(N) 
+掃描 Activity 表一次.
+
+### ✔ Space Complexity: O(U)
+where U is daily unique users.
 
 ---
 
-# ✅ 解法 2：最佳化解（利用索引、JOIN、Window Function)
+# ✅ 解法 2：DATEDIFF
 
 ### ✔ 主要技巧
-- Index-aware join
+- DATEDIFF: DATEDIFF(date1, date2) = date1 − date2, i.e. The end date must come first，但可讀性較低
 - Hash aggregation
 - Window functions  
 
-### ✔ Time Complexity
-O(N log N) or O(N) depending on DB optimizer.
+### ✔ Time Complexity: O(N) 
+掃描 Activity 表一次.
 
-### ✔ Space Complexity
-O(min(N, M)) for hash or window frames.
-
+### ✔ Space Complexity: O(U) 
+where U is daily unique users.
 ---
 
-# ✅ 解法 3：進階 SQL（子查詢、CTE、分析函數）
 
-(Explain alternative formulation.)
 
----
-
-# ⚙️ 效能分析（Time / Space Complexity）
-- With index: O(N + M)
-- Without index: potentially O(N × M)
-- Window function requires O(N log N) due to sorting.
-
----
-
-# 🚫 常見錯誤
-- Wrong join direction  
-- Using subqueries without index  
-- Off-by-one mistakes in date difference  
-- Misuse of GROUP BY  
-
----
-
-# 🧠 思想誤區
+<!-- # 🧠 思想誤區
 - Thinking SQL executes row-by-row  
 - Assuming window functions are O(1)  
 - Believing subqueries are always slower  
@@ -68,4 +56,4 @@ O(min(N, M)) for hash or window frames.
 3. Can you rewrite using window functions?
 4. How does the query planner optimize this case?
 
----
+--- -->

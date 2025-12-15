@@ -8,20 +8,28 @@
 
 # ✅ 解法 1：Baseline Solution（直覺）
 
+### ✔ 主要技巧
+- DATEDIFF 
+- CROSS　JOIN
+
 ### ✔ 思路
-(Explain intuitive approach.)
+1. Join the Weather table by itself, nameing table 1 as w1 and table 2 as w2.
+2. Use WHERE clause to select the rows that the temperature of w1 is greater than the temperature of w2.
+3. Like 2., add a condition in WHERE clause using DATEDIFF function to determine whether the recordDates are consecutive.
 
-### ✔ Time Complexity
-O(N log N) / O(N + M) depending on JOIN / sort.
+### ✔ Time Complexity: O(n^2) 
+where n isthe number of weather days. The self join operation 
+compares recordDate with each other.
 
-### ✔ Space Complexity
-O(1) / O(N) depending on window function or join buffers.
+### ✔ Space Complexity: O(k)
+where k is the number of dates with higher temperature than yesterday.
+The output stores the matchind record IDs solely.
 
 ---
 
-# ✅ 解法 2：最佳化解（利用索引、JOIN、Window Function)
+# ✅ 解法 2：類似解法 1，改利用 INTERVAL *  DAY
 
-### ✔ 主要技巧
+<!-- ### ✔ 主要技巧
 - Index-aware join
 - Hash aggregation
 - Window functions  
@@ -30,42 +38,73 @@ O(1) / O(N) depending on window function or join buffers.
 O(N log N) or O(N) depending on DB optimizer.
 
 ### ✔ Space Complexity
-O(min(N, M)) for hash or window frames.
+O(min(N, M)) for hash or window frames. -->
 
 ---
 
-# ✅ 解法 3：進階 SQL（子查詢、CTE、分析函數）
+# ✅ 解法 3：EXISTS
 
 (Explain alternative formulation.)
 
 ---
+### ✔ 主要技巧
+- EXISTS
+- Semi-Join
 
-# ⚙️ 效能分析（Time / Space Complexity）
-- With index: O(N + M)
-- Without index: potentially O(N × M)
-- Window function requires O(N log N) due to sorting.
+### ✔ 思路
+1. WHERE EXISTS (...)
+Use WHERE EXISTS clause to filter yje results which are based ona conditon difined in a subquery.
+a. If the subquery returns any rows, than the condition is true.
+b. If the subquery no returns any rows, than the condition is false.
+
+2. SELECT 1 FROM Weather AS yesterday
+There is a subquery filtering a constant value 1.
+
+a. SELECT 1/SELECT */SELECT 'x': 功能一樣，因為 EXISTS 不看內容.
+
+SELECT ...
+FROM table1
+WHERE EXISTS (
+    SELECT 1
+    FROM table2
+    WHERE 條件
+);
+
+
+
+### ✔ Time Complexity
+O(N) on recordDate.
+
+### ✔ Space Complexity
+O(1) for EXISTS function.
+
 
 ---
 
-# 🚫 常見錯誤
-- Wrong join direction  
-- Using subqueries without index  
-- Off-by-one mistakes in date difference  
-- Misuse of GROUP BY  
+# 🚫 比較 EXISTS V.S. IN
+
+- EXISTS 更安全
+
+| 問題         | IN         | EXISTS |
+| --------     | ---------- | ------ |
+| 子查詢 NULL   | ❌ 會出錯或結果怪  | ✅ 安全   |
+| 大資料量      | ❌ 可能產生巨大集合 | ✅ 逐列判斷 |
+| 語意          | 值比較        | 存在性判斷  |
+
 
 ---
 
-# 🧠 思想誤區
+<!-- # 🧠 思想誤區
 - Thinking SQL executes row-by-row  
 - Assuming window functions are O(1)  
-- Believing subqueries are always slower  
+- Believing subqueries are always slower   -->
 
 ---
 
-# 🧪 面試追問
+<!-- # 🧪 面試追問
 1. What if tables are huge (100M rows)?
 2. How would you index this schema?
 3. Can you rewrite using window functions?
-4. How does the query planner optimize this case?
+4. How does the query planner optimize this case? -->
 
 ---

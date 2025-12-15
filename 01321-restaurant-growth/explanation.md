@@ -2,41 +2,64 @@
 # Restaurant Growth
 
 ## 🔍 Problem Summary
-(High-level restatement of the problem in natural language.)
+Compute the moving average of how much the customer paid in a seven days window (i.e., current day + 6 days before). average_amount should be rounded to two decimal places.
+
+Return the result table ordered by visited_on in ascending order.
 
 ---
 
 # ✅ 解法 1：Baseline Solution（直覺）
 
 ### ✔ 思路
-(Explain intuitive approach.)
+1. 先將每天金額加總
 
-### ✔ Time Complexity
-O(N log N) / O(N + M) depending on JOIN / sort.
+2. 再做 7 天滑動視窗
 
-### ✔ Space Complexity
-O(1) / O(N) depending on window function or join buffers.
+### ✔ 主要技巧
+1. BETWEEN 表示「7 天視窗」
+d2.visited_on BETWEEN d1.visited_on - 6 AND d1.visited_on
+
+2. HAVING COUNT = 7（LeetCode 關鍵陷阱）
+HAVING COUNT(d2.visited_on) = 7
+為確保連續 7 天都有資料，篩選並排除前 6 天沒有資料的日期
+
+### ✔ Time Complexity: O(N) 
+where N is the number of dates.
+
+### ✔ Space Complexity: O(D) 
+where D is the number of non-complicated date.
 
 ---
 
-# ✅ 解法 2：最佳化解（利用索引、JOIN、Window Function)
+# ✅ 解法 2：最佳化解(Window Function)
+
+### ✔ 思路
+1. 做 7 天將滑動視窗
+2. 每 7 天做一次加總計算
+
 
 ### ✔ 主要技巧
-- Index-aware join
-- Hash aggregation
-- Window functions  
+- SUM(...) OVER(...)
+- RANGE BETWEEN INTERVAL 6 DAY PRECEDING AND CURRENT ROW
+定義 7 天 WINDOW
 
+- RANGE BETWEEN INTERVAL 6 DAY PRECEDING AND CURRENT ROW
+對每一個 visited_on = t，納入 [t-6, t] 共 7 天內所有資料
+
+- DATEDIFF()
+計算取第一天的日期差距，並選有前 7 天的日期.
+<!-- 
 ### ✔ Time Complexity
 O(N log N) or O(N) depending on DB optimizer.
 
 ### ✔ Space Complexity
-O(min(N, M)) for hash or window frames.
+O(min(N, M)) for hash or window frames. -->
 
 ---
 
-# ✅ 解法 3：進階 SQL（子查詢、CTE、分析函數）
+# ✅ 解法 3：進階 SQL（ROWS-based, Recommended，沒有子查詢 MIN、不用 DISTINCT）
 
-(Explain alternative formulation.)
+
 
 ---
 
@@ -48,13 +71,14 @@ O(min(N, M)) for hash or window frames.
 ---
 
 # 🚫 常見錯誤
-- Wrong join direction  
-- Using subqueries without index  
-- Off-by-one mistakes in date difference  
-- Misuse of GROUP BY  
+- 日期不包含連續 7 天
+- 日期若本身非連續日期有些查詢方式容易出錯
+- MS SQL Server 沒有 INTERVAL
+- MS SQL Server 不支援時間型 RANGE
+- MS SQL Server: AVG(int) → int / int → 整數平均，所以計算小數須先把數值轉換為小數格式
 
 ---
-
+<!-- 
 # 🧠 思想誤區
 - Thinking SQL executes row-by-row  
 - Assuming window functions are O(1)  
@@ -68,4 +92,4 @@ O(min(N, M)) for hash or window frames.
 3. Can you rewrite using window functions?
 4. How does the query planner optimize this case?
 
----
+--- -->
