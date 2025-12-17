@@ -1,22 +1,39 @@
 -- SQL Server (T-SQL) Solution for Game Play Analysis IV
 
-/* ... */
-WITH ft AS(
-SELECT player_id, 
-       MIN(event_date) AS first_login
-FROM Activity
-GROUP BY player_id
-),
-next_day AS(
-SELECT f.player_id
-FROM ft AS f
-INNER JOIN Activity AS a
-ON f.player_id = a.player_id
-AND DATEDIFF(DAY, f.first_login, a.event_date) = 1
-)
+-- MySQL Solution for Managers with at Least 5 Direct Reports
 
-SELECT 
-    ROUND(1.0 * COUNT(DISTINCT n.player_id) / (SELECT COUNT(DISTINCT player_id) FROM Activity), 2) AS fraction
-FROM ft as f 
-LEFT JOIN next_day AS n 
-ON f.player_id = n.player_id
+/* Approach 1 */
+SELECT name
+FROM Employee
+WHERE id IN (
+    SELECT managerId
+    FROM Employee
+    WHERE managerId IS NOT NULL
+    GROUP BY managerId
+    HAVING COUNT(*) >= 5
+);
+
+
+ 
+/* Approach 2 */
+SELECT e1.name
+FROM Employee e1
+JOIN Employee e2
+  ON e1.id = e2.managerId
+GROUP BY e1.id, e1.name
+HAVING COUNT(e2.id) >= 5;
+
+
+
+ 
+/* Approach 3 */
+SELECT e.name
+FROM Employee e
+JOIN (
+    SELECT managerId
+    FROM Employee
+    WHERE managerId IS NOT NULL
+    GROUP BY managerId
+    HAVING COUNT(*) >= 5
+) t
+ON e.id = t.managerId;
