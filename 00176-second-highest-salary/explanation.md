@@ -1,71 +1,70 @@
 
 # Second Highest Salary
 
+
 ## 🔍 Problem Summary
-(High-level restatement of the problem in natural language.)
+Write a solution to find the second highest distinct salary from the Employee table. If there is no second highest salary, return null (return None in Pandas), i.e., High-level restatement of the problem in natural language.
+
 
 ---
 
-# ✅ 解法 1：Baseline Solution（直覺）
+# ✅ 解法 1：Baseline Solution（利用 DENSE_RANK()、Scalar Subquery）
 
 ### ✔ 思路
-(Explain intuitive approach.)
-
-### ✔ Time Complexity
-O(N log N) / O(N + M) depending on JOIN / sort.
-
-### ✔ Space Complexity
-O(1) / O(N) depending on window function or join buffers.
-
----
-
-# ✅ 解法 2：最佳化解（利用索引、JOIN、Window Function)
+使用 DENSE_RANK() 排名，但如果沒有第二高的 salary 不會回傳值，但題目需要回傳 null，因此加入 Scalar Subquery.
 
 ### ✔ 主要技巧
-- Index-aware join
-- Hash aggregation
-- Window functions  
+- DENSE_RANK()
+- Scalar Subquery: 分為
+1. 內層查詢，找 rn=2，若找不到，則回傳 null.
+2. 外層查詢 SELECT (subquery)，一定回傳一列，為 null 或 salary.
+- MAX() or TOP 1: 
+保證 Scalar subquery 一定要「只回傳一個值」
 
-### ✔ Time Complexity
-O(N log N) or O(N) depending on DB optimizer.
 
-### ✔ Space Complexity
-O(min(N, M)) for hash or window frames.
+### ✔ Time Complexity:O(N log N) 
+depending on DENSE_RANK().
 
----
-
-# ✅ 解法 3：進階 SQL（子查詢、CTE、分析函數）
-
-(Explain alternative formulation.)
+### ✔ Space Complexity:O(N) 
+depending on subquery.
 
 ---
 
-# ⚙️ 效能分析（Time / Space Complexity）
-- With index: O(N + M)
-- Without index: potentially O(N × M)
-- Window function requires O(N log N) due to sorting.
+# ✅ 解法 2： 技巧較難(利用 DENSE_RANK()、LEFT JOIN)
+
+### ✔ 主要技巧
+- DENSE_RANK()
+- (SELECT 1): 確保至少一列
+- LEFT JOIN 失敗時 -> salary = null
+- MAX(null) -> null
+
+### ✔ Time Complexity:O(N log N) 
+depending on DENSE_RANK().
+
+### ✔ Space Complexity: O(N) 
+depending on r table.
 
 ---
 
-# 🚫 常見錯誤
-- Wrong join direction  
-- Using subqueries without index  
-- Off-by-one mistakes in date difference  
-- Misuse of GROUP BY  
+# 🚫 常見錯誤 
+- 不能在 MSSQL 用 LIMIT，但可以改用 OFFSET … FETCH 或 DENSE_RANK() 解 Top-N queries.
+
+MySQL              : LIMIT / OFFSET
+SQL Server         : TOP / OFFSET FETCH
+
+
 
 ---
 
 # 🧠 思想誤區
-- Thinking SQL executes row-by-row  
-- Assuming window functions are O(1)  
-- Believing subqueries are always slower  
+- 沒有注意要如果第二高的 salary 需要顯示 null
 
 ---
 
-# 🧪 面試追問
+<!-- # 🧪 面試追問
 1. What if tables are huge (100M rows)?
 2. How would you index this schema?
 3. Can you rewrite using window functions?
-4. How does the query planner optimize this case?
+4. How does the query planner optimize this case? -->
 
 ---
