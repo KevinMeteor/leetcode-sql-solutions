@@ -9,63 +9,59 @@
 # ✅ 解法 1：Baseline Solution（直覺）
 
 ### ✔ 思路
-(Explain intuitive approach.)
-
-### ✔ Time Complexity
-O(N log N) / O(N + M) depending on JOIN / sort.
-
-### ✔ Space Complexity
-O(1) / O(N) depending on window function or join buffers.
-
----
-
-# ✅ 解法 2：最佳化解（利用索引、JOIN、Window Function)
+以 Customer table 為主合併 Orders table，
+再將沒有訂單的客人名稱篩選出.
 
 ### ✔ 主要技巧
-- Index-aware join
-- Hash aggregation
-- Window functions  
+- LEFT JOIN / RIGHT JOIN
+- WHERE o.id IS NULL: 篩選掉合併報表後 id 為 NULL 者.
 
-### ✔ Time Complexity
-O(N log N) or O(N) depending on DB optimizer.
+### ✔ Time Complexity: O(N + M) 
+where N is the number of rpw of the Orders table,
+and M is the number of rpw of the Customers table.
 
-### ✔ Space Complexity
-O(min(N, M)) for hash or window frames.
+### ✔ Space Complexity: O(1) 
 
----
-
-# ✅ 解法 3：進階 SQL（子查詢、CTE、分析函數）
-
-(Explain alternative formulation.)
 
 ---
 
-# ⚙️ 效能分析（Time / Space Complexity）
-- With index: O(N + M)
-- Without index: potentially O(N × M)
-- Window function requires O(N log N) due to sorting.
+# ✅ 解法 2：程式語意與題目較接近(利用 EXISTS)
+
+### ✔ 思路
+
+
+### ✔ 主要技巧
+- NOT EXISTS: 判斷子查詢的結果有沒有回傳資料，若沒有則執行查詢中的結果
+- SELECT 1: 回傳一列資料
+
+
+### ✔ Time Complexity: O(N * M)
+where N is the number of rpw of the Orders table,
+and M is the number of rpw of the Customers table.
+
+### ✔ Space Complexity: O(1) 
+
 
 ---
 
 # 🚫 常見錯誤
-- Wrong join direction  
-- Using subqueries without index  
-- Off-by-one mistakes in date difference  
-- Misuse of GROUP BY  
+- NOT IN Trap
+如果篩選變數存在任何 NULL，則篩選結果會顯示全部不符合.
+
 
 ---
-
-# 🧠 思想誤區
+<!--  -->
+<!-- # 🧠 思想誤區
 - Thinking SQL executes row-by-row  
 - Assuming window functions are O(1)  
-- Believing subqueries are always slower  
+- Believing subqueries are always slower   -->
 
----
-
+<!-- --- -->
+<!-- 
 # 🧪 面試追問
 1. What if tables are huge (100M rows)?
 2. How would you index this schema?
 3. Can you rewrite using window functions?
-4. How does the query planner optimize this case?
+4. How does the query planner optimize this case? -->
 
----
+<!-- --- -->

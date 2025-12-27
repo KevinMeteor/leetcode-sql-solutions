@@ -2,70 +2,65 @@
 # Rank Scores
 
 ## 🔍 Problem Summary
-(High-level restatement of the problem in natural language.)
+Write a solution to find the rank of the scores. The ranking should be calculated according to the following rules:
+
+- The scores should be ranked from the highest to the lowest.
+- If there is a tie between two scores, both should have the same ranking.
+- After a tie, the next ranking number should be the next consecutive integer value. In other words, there should be no holes between ranks.
+
+Return the result table ordered by score in descending order.
 
 ---
 
 # ✅ 解法 1：Baseline Solution（直覺）
 
 ### ✔ 思路
-(Explain intuitive approach.)
-
-### ✔ Time Complexity
-O(N log N) / O(N + M) depending on JOIN / sort.
-
-### ✔ Space Complexity
-O(1) / O(N) depending on window function or join buffers.
-
----
-
-# ✅ 解法 2：最佳化解（利用索引、JOIN、Window Function)
+直接利用  DENSE_RANK() 排名.
 
 ### ✔ 主要技巧
-- Index-aware join
-- Hash aggregation
-- Window functions  
+- DENSE_RANK()
 
-### ✔ Time Complexity
-O(N log N) or O(N) depending on DB optimizer.
 
-### ✔ Space Complexity
-O(min(N, M)) for hash or window frames.
+### ✔ Time Complexity: O(N log N)
+where N is the row of the Scores table.
 
----
+### ✔ Space Complexity: O(N)
+where N is the row of the Scores table.
 
-# ✅ 解法 3：進階 SQL（子查詢、CTE、分析函數）
-
-(Explain alternative formulation.)
 
 ---
-
-# ⚙️ 效能分析（Time / Space Complexity）
-- With index: O(N + M)
-- Without index: potentially O(N × M)
-- Window function requires O(N log N) due to sorting.
-
----
-
-# 🚫 常見錯誤
-- Wrong join direction  
-- Using subqueries without index  
-- Off-by-one mistakes in date difference  
-- Misuse of GROUP BY  
-
----
-
 # 🧠 思想誤區
+- ROW_NUMBER()、RANK()、DENSE_RANK() 適用情境比較
+
+| Function       | 同分是否相同名次 | 是否跳號 | 名次是否唯一 | 常見用途      |
+| -------------- | -------- | ---- | ------ | --------- |
+| `ROW_NUMBER()` | ❌ 否      | ❌ 否  | ✅ 是    | 排序後取第 N 筆 |
+| `RANK()`       | ✅ 是      | ✅ 是  | ❌ 否    | 比賽名次（有並列） |
+| `DENSE_RANK()` | ✅ 是      | ❌ 否  | ❌ 否    | 排行榜（不跳號）  |
+
+- ROW_NUMBER()、RANK()、DENSE_RANK() Time / Space Complexity 比較
+三者的 Complexity 相同，主要是差在功能性.
+
+| Function       | Time       | Space | 原因 |
+| -------------- | ---------- | ----- | --  |
+| `ROW_NUMBER()` | O(N log N) | O(N)  | 排序 |
+| `RANK()`       | O(N log N) | O(N)  | 排序 |
+| `DENSE_RANK()` | O(N log N) | O(N)  | 排序 |
+
+
+<!-- --- -->
+<!--
+ # 🚫 常見錯誤
 - Thinking SQL executes row-by-row  
 - Assuming window functions are O(1)  
-- Believing subqueries are always slower  
+- Believing subqueries are always slower   -->
 
----
-
+<!-- --- -->
+<!-- 
 # 🧪 面試追問
 1. What if tables are huge (100M rows)?
 2. How would you index this schema?
 3. Can you rewrite using window functions?
-4. How does the query planner optimize this case?
+4. How does the query planner optimize this case? -->
 
 ---
