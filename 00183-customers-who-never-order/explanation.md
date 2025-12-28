@@ -2,7 +2,9 @@
 # Customers Who Never Order
 
 ## 🔍 Problem Summary
-(High-level restatement of the problem in natural language.)
+Write a solution to find all customers who never order anything.
+
+Return the result table in any order.
 
 ---
 
@@ -28,7 +30,7 @@ and M is the number of rpw of the Customers table.
 # ✅ 解法 2：程式語意與題目較接近(利用 EXISTS)
 
 ### ✔ 思路
-
+以 Customer table 為，將沒有訂單的客人名稱篩選出.
 
 ### ✔ 主要技巧
 - NOT EXISTS: 判斷子查詢的結果有沒有回傳資料，若沒有則執行查詢中的結果

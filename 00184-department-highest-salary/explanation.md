@@ -2,48 +2,63 @@
 # Department Highest Salary
 
 ## 🔍 Problem Summary
-(High-level restatement of the problem in natural language.)
+Write a solution to find employees who have the highest salary in each of the departments.
+
+Return the result table in any order.
+
+
 
 ---
 
-# ✅ 解法 1：Baseline Solution（直覺）
+# ✅ 解法 1：Baseline Solution(利用 RANK)
 
 ### ✔ 思路
-(Explain intuitive approach.)
+先將 Employee table & Department table 以 JOIN 合併，
+再計算各部門內的薪資排名，並取出各部門中薪資的第一名.
 
-### ✔ Time Complexity
-O(N log N) / O(N + M) depending on JOIN / sort.
-
-### ✔ Space Complexity
-O(1) / O(N) depending on window function or join buffers.
-
----
-
-# ✅ 解法 2：最佳化解（利用索引、JOIN、Window Function)
 
 ### ✔ 主要技巧
-- Index-aware join
-- Hash aggregation
-- Window functions  
+- Window Function
+- PARTITION BY d.name: 部門內分組
+- ORDER BY e.salary DESC: 依據薪資排序
+- an.rank = 1: 取第一名
+- 若同部門有 多人並列最高薪 --> 全部列出
 
-### ✔ Time Complexity
-O(N log N) or O(N) depending on DB optimizer.
+### ✔ Time Complexity: O(N log N) 
+where N is the number of row of the Employee table.
 
-### ✔ Space Complexity
-O(min(N, M)) for hash or window frames.
+### ✔ Space Complexity: O(N) 
+where N is the number of row of the Employee table.
 
 ---
 
-# ✅ 解法 3：進階 SQL（子查詢、CTE、分析函數）
+# ✅ 解法 2：最佳化解(利用 NOT EXISTS)
 
-(Explain alternative formulation.)
+### ✔ 思路
+找「不存在同部門、薪資比我更高的人」的員工
 
+ 
+### ✔ 主要技巧
+- NOT EXISTS
+- JOIN
+
+### ✔ Time Complexity: O($N ^ 2$) if without index, O(N * logN) if with index.
+where N is the number of row of the Employee table.
+
+### ✔ Space Complexity: O(1)
+O(N^2)
+**O(N^2)**
+$O(N^2)$
 ---
 
 # ⚙️ 效能分析（Time / Space Complexity）
-- With index: O(N + M)
-- Without index: potentially O(N × M)
-- Window function requires O(N log N) due to sorting.
+
+| 解法             | Time（無 index） | Time（有 index） | Space    |
+| -------------- | ------------- | ------------- | -------- |
+| `DENSE_RANK()` | O(N * log N)    | O(N * log N)    | O(N)     |
+| `MAX + JOIN`   | O(N * log N)    | O(N)            | O(N)     |
+| `NOT EXISTS`   | ❌ O(N²)       | ✅ O(N)         | **O(1)** |
+
 
 ---
 
