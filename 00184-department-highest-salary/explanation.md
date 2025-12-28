@@ -7,8 +7,8 @@ Write a solution to find employees who have the highest salary in each of the de
 Return the result table in any order.
 
 
-
 ---
+
 
 # ✅ 解法 1：Baseline Solution(利用 RANK)
 
@@ -24,7 +24,7 @@ Return the result table in any order.
 - an.rank = 1: 取第一名
 - 若同部門有 多人並列最高薪 --> 全部列出
 
-### ✔ Time Complexity: $O(N * log N)$
+### ✔ Time Complexity: $O(N * \log{N})$
 where N is the number of row of the Employee table.
 
 ### ✔ Space Complexity: $O(N)$
@@ -39,45 +39,41 @@ where N is the number of row of the Employee table.
 
  
 ### ✔ 主要技巧
-- NOT EXISTS
+- NOT EXISTS: 使用時機在於 - 沒有 / 不存在 / never / without
 - JOIN
 
-### ✔ Time Complexity: $O(N ^ 2)$ if without index, $O(N * logN)$ if with index.
+### ✔ Time Complexity: $O(N ^ 2)$ if without index, $O(N * \log{N})$ if with index.
 where N is the number of row of the Employee table.
 
 ### ✔ Space Complexity: $O(1)$
 
-$O(N * \log{N})$
-$O(N \cross \log{N})$
-$O(N logN)$
 
 ---
 
 # ⚙️ 效能分析（Time / Space Complexity）
 
 | 解法             | Time（無 index） | Time（有 index） | Space    |
-| -------------- | ------------- | ------------- | -------- |
-| `DENSE_RANK()` | $O(N * log N)$    | $O(N * log N)$    | $O(N)$     |
-| `MAX + JOIN`   | $O(N * log N)$    | $O(N)$            | $O(N)$     |
-| `NOT EXISTS`   | ❌ $O(N^2)$       | ✅ $O(N)$        | $O(1)$ |
+| --------------- | ------------- | ------------- | -------- |
+| `RANK()` or `DENSE_RANK()` | $O(N * \log{N})$  | $O(N * \log{N})$  | $O(N)$     |
+| `NOT EXISTS`   | ❌ $O(N^2)$       | ✅ $O(N)$          | $O(1)$ |
 
 
 ---
 
-# 🚫 常見錯誤
+<!-- # 🚫 常見錯誤
 - Wrong join direction  
 - Using subqueries without index  
 - Off-by-one mistakes in date difference  
-- Misuse of GROUP BY  
-
+- Misuse of GROUP BY   -->
+<!-- 
 ---
 
 # 🧠 思想誤區
 - Thinking SQL executes row-by-row  
 - Assuming window functions are O(1)  
-- Believing subqueries are always slower  
+- Believing subqueries are always slower   -->
 
----
+<!-- ---
 
 # 🧪 面試追問
 1. What if tables are huge (100M rows)?
@@ -85,4 +81,4 @@ $O(N logN)$
 3. Can you rewrite using window functions?
 4. How does the query planner optimize this case?
 
----
+--- -->

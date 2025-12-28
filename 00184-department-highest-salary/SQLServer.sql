@@ -5,7 +5,7 @@ FROM(
     SELECT d.name AS dname,
            e.name AS ename,
            e.salary AS salary,
-           RANK() OVER(PARTITION BY d.name ORDER BY e.salary DESC) AS 'rank'
+           RANK() OVER(PARTITION BY d.name ORDER BY e.salary DESC) AS 'rank' /*   or DENSE_RANK() */
     FROM Employee AS e
     JOIN Department AS d
     ON e.departmentId = d.id
