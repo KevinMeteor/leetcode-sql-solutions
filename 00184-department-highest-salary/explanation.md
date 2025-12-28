@@ -24,10 +24,10 @@ Return the result table in any order.
 - an.rank = 1: 取第一名
 - 若同部門有 多人並列最高薪 --> 全部列出
 
-### ✔ Time Complexity: O(N log N) 
+### ✔ Time Complexity: $O(N * log N)$
 where N is the number of row of the Employee table.
 
-### ✔ Space Complexity: O(N) 
+### ✔ Space Complexity:$O(N)$
 where N is the number of row of the Employee table.
 
 ---
@@ -42,22 +42,25 @@ where N is the number of row of the Employee table.
 - NOT EXISTS
 - JOIN
 
-### ✔ Time Complexity: O($N ^ 2$) if without index, O(N * logN) if with index.
+### ✔ Time Complexity: $O(N ^ 2)$ if without index, $O(N * \log{N})$ if with index.
 where N is the number of row of the Employee table.
 
-### ✔ Space Complexity: O(1)
-O(N^2)
-**O(N^2)**
-$O(N^2)$
+### ✔ Space Complexity: $O(1)$
+
+$O(N * \log{N})$
+$O(N * \logN)$
+$O(N * logN)$
+$O(N logN)$
+
 ---
 
 # ⚙️ 效能分析（Time / Space Complexity）
 
 | 解法             | Time（無 index） | Time（有 index） | Space    |
 | -------------- | ------------- | ------------- | -------- |
-| `DENSE_RANK()` | O(N * log N)    | O(N * log N)    | O(N)     |
-| `MAX + JOIN`   | O(N * log N)    | O(N)            | O(N)     |
-| `NOT EXISTS`   | ❌ O(N²)       | ✅ O(N)         | **O(1)** |
+| `DENSE_RANK()` | $O(N * log N)$    | $O(N * log N)$    | $O(N)$     |
+| `MAX + JOIN`   | $O(N * log N)$    | $O(N)$            | $O(N)$     |
+| `NOT EXISTS`   | ❌ $O(N^2)$       | ✅ $O(N)$        | $O(1)$ |
 
 
 ---
