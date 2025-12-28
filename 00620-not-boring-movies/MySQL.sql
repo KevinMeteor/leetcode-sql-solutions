@@ -1,5 +1,4 @@
--- MySQL Solution for Game Play Analysis I
-
+-- MySQL Solution for Not Boring Moives
 /*  Approach  1 */
 SELECT *
 FROM Cinema AS c

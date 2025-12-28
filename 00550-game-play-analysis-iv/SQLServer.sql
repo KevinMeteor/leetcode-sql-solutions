@@ -1,6 +1,5 @@
 -- SQL Server (T-SQL) Solution for Game Play Analysis IV
-
-/* ... */
+/* Approach 1 */
 WITH ft AS(
 SELECT player_id, 
        MIN(event_date) AS first_login

@@ -6,7 +6,7 @@ Compute fraction of players that logged in again on the day after the day they f
 
 ---
 
-# ✅ 解法 1：INNER JOIN（直覺、可讀）
+# ✅ 解法 1：`INNER JOIN`（直覺、可讀）
 
 ### ✔ 思路
 1. Get first logged in day.
@@ -14,15 +14,15 @@ Compute fraction of players that logged in again on the day after the day they f
 3. Get the total count of users.
 
 
-### ✔ Time Complexity: O(N^2) 
+### ✔ Time Complexity: $O(N^2)$ 
 
 
-### ✔ Space Complexity: O(N)  
+### ✔ Space Complexity: $O(N)$  
 
 
 ---
 
-# ✅ 解法 2：EXISTS(最佳、可讀)
+# ✅ 解法 2：`EXISTS`(最佳、可讀)
 
 ### ✔ 思路
 1. Lock to first login day.
@@ -30,41 +30,43 @@ Compute fraction of players that logged in again on the day after the day they f
 3. Compute fraction.
 
 ### ✔ 主要技巧
-- EXISTS
+- `EXISTS`
+- `SELECT 1`
 
+### ✔ Time Complexity: $O(N^2)$
+with index on (`player_id`, `event_date`).
 
-### ✔ Time Complexity: O(N^2) 
-with index on (player_id, event_date).
-1. O(N^2) for worse case without index
-2. O(N) for average case with index
+1. $O(N^2)$ for worse case without index
+2. $O(N)$ for average case with index
 
-### ✔ Space Complexity: O(1) 
+### ✔ Space Complexity: $O(1)$ 
 不產生中間結果.
+
 ---
 
-# ✅ 解法 3：WITH（SQL Server (T-SQL)）
+# ✅ 解法 3：`JOIN`
 
 ### ✔ 思路
 1. Get first logged in day.
-2. Return #of users that logged in two consecutive days.
+2. Return  of users that logged in two consecutive days.
 3. Get the total count of users.
 
 ---
 
-### ✔ Time Complexity: O(N^2) 
-1. O(N^2) for worse case without index
-2. O(N) for average case with index
+### ✔ Time Complexity: $O(N^2$)$ 
+1. $O(N^2)$ for worse case without index
+2. $O(N)$ for average case with index
 
-### ✔ Space Complexity: O(P)  
-where P is the number of unique player(P ≤ N).
+### ✔ Space Complexity: $O(P)$  
+where $P$ is the number of unique player($P ≤ N$).
 
 
 ---
 
 # 🚫 常見錯誤
-- ROUND() 在 T-SQL 會整數除法，需乘上 1.0 確保為浮點數.
-- CTE 只能有一個 WITH，多個 CTE 要用逗號隔開，不要寫成兩個或多個 WITH.
-- 計算 fracction 的分母不應 GROUP BY，因為會產生多列查詢而非單一 scalar.
+- `ROUND()` 在 T-SQL 會整數除法，需乘上 1.0 確保為浮點數.
+- CTE 只能有一個 `WITH`，多個 CTE 要用逗號隔開，不要寫成兩個或多個 `WITH`.
+- 計算 fraction 的分母不應用 `GROUP BY`，因為會產生多列查詢而非單一 scalar.
 
 ---
 <!-- 

@@ -82,7 +82,7 @@ for EXISTS function.
 
 ---
 
-# 🚫 `EXISTS` V.S. `IN`
+# 🧠 `EXISTS` V.S. `IN`
 
 - `EXISTS` 更安全
 

@@ -1,5 +1,4 @@
 -- MySQL Solution for Game Play Analysis I
-
 /*  Approach  1 */
 SELECT player_id, MIN(event_date) as first_login
 FROM  Activity 

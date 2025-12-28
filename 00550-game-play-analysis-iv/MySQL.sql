@@ -1,5 +1,4 @@
 -- MySQL Solution for Game Play Analysis IV
-
 /* Approach 1 */
 WITH first_login AS (
     SELECT player_id, 
@@ -19,7 +18,6 @@ Inner JOIN Activity AS a
   ON f.player_id = a.player_id
  AND a.event_date = f.first_day + INTERVAL 1 DAY;
 
- 
 /* Approach 2 */
 SELECT
     ROUND(
@@ -40,7 +38,6 @@ AND EXISTS (
       AND b.event_date = a.event_date + INTERVAL 1 DAY
 );
 
- 
 /* Approach 3 */
 SELECT
     a.player_id,
@@ -52,4 +49,4 @@ JOIN (
     SELECT player_id, MIN(event_date) AS first_login
     FROM Activity
     GROUP BY player_id
-) b ON a.player_id = b.player_id;
+) AS b ON a.player_id = b.player_id;
