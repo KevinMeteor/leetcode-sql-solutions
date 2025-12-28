@@ -27,7 +27,7 @@ Return the result table in any order.
 ### ✔ Time Complexity: $O(N * log N)$
 where N is the number of row of the Employee table.
 
-### ✔ Space Complexity:$O(N)$
+### ✔ Space Complexity: $O(N)$
 where N is the number of row of the Employee table.
 
 ---
@@ -42,14 +42,13 @@ where N is the number of row of the Employee table.
 - NOT EXISTS
 - JOIN
 
-### ✔ Time Complexity: $O(N ^ 2)$ if without index, $O(N * \log{N})$ if with index.
+### ✔ Time Complexity: $O(N ^ 2)$ if without index, $O(N * logN)$ if with index.
 where N is the number of row of the Employee table.
 
 ### ✔ Space Complexity: $O(1)$
 
 $O(N * \log{N})$
-$O(N * \logN)$
-$O(N * logN)$
+$O(N \cross \log{N})$
 $O(N logN)$
 
 ---
