@@ -1,4 +1,4 @@
--- SQL Server (T-SQL) Solution for User Activity
+-- SQL Server (T-SQL) Solution for Queries Quality and Percentage
 /* Approach 1 */
 SELECT
     query_name,
@@ -15,7 +15,6 @@ FROM (
     FROM Queries
 ) AS q
 GROUP BY query_name;
-
 
 /* Approach 2 */
 SELECT

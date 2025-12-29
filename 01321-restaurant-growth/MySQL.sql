@@ -1,7 +1,6 @@
 -- MySQL Solution for Restaurant Growth
-
 /* Approach 1 */
-# 以每天為單位加總
+-- # 以每天為單位加總
 WITH daily AS (
     SELECT
         visited_on,
@@ -10,7 +9,7 @@ WITH daily AS (
     GROUP BY visited_on
 )
 
-# 計算移動平均
+-- # 計算移動平均
 SELECT
     d1.visited_on,
     SUM(d2.daily_amount) AS amount,
@@ -23,7 +22,6 @@ GROUP BY d1.visited_on
 HAVING COUNT(d2.visited_on) = 7
 ORDER BY d1.visited_on ASC;
 
-
 /* Approach 2 */
 SELECT visited_on, 
        amount, 
@@ -32,9 +30,8 @@ FROM (SELECT DISTINCT visited_on, SUM(amount) OVER
  (ORDER BY visited_on RANGE BETWEEN INTERVAL 6 DAY PRECEDING AND CURRENT ROW) AS amount,
   ROUND(SUM(amount) OVER (ORDER BY visited_on RANGE BETWEEN INTERVAL 6 DAY PRECEDING AND CURRENT ROW)/7. ,2)
    AS average_amount
-FROM Customer) as whole_totals
+FROM Customer) AS whole_totals
 WHERE DATEDIFF(visited_on, (SELECT MIN(visited_on) FROM Customer)) >= 6
-
 
 /* Approach 3 */
 WITH daily AS (

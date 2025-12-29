@@ -1,4 +1,3 @@
-
 # Game Play Analysis IV
 
 ## 🔍 Problem Summary
@@ -10,12 +9,11 @@ Compute fraction of players that logged in again on the day after the day they f
 
 ### ✔ 思路
 1. Get first logged in day.
-2. Return #of users that logged in two consecutive days.
+2. Return id of users that logged in two consecutive days.
 3. Get the total count of users.
 
 
 ### ✔ Time Complexity: $O(N^2)$ 
-
 
 ### ✔ Space Complexity: $O(N)$  
 

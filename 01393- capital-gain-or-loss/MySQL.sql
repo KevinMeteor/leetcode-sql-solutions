@@ -1,11 +1,9 @@
 -- MySQL Solution for Capital Gain/Loss
-
 /* Approach 1 */
 SELECT stock_name,
        SUM(IF(operation='Buy', -1.0 * price, +1.0 * price)) AS capital_gain_loss
 FROM Stocks
-GROUP BY stock_name
-
+GROUP BY stock_name;
 
 /* Approach 2 */
 SELECT

@@ -1,4 +1,3 @@
-
 # Department Highest Salary
 
 ## 🔍 Problem Summary
@@ -10,40 +9,40 @@ Return the result table in any order.
 ---
 
 
-# ✅ 解法 1：Baseline Solution(利用 RANK)
+# ✅ 解法 1：Baseline Solution(利用 `RANK`)
 
 ### ✔ 思路
-先將 Employee table & Department table 以 JOIN 合併，
+先將 Employee table & Department table 以 `JOIN` 合併，
 再計算各部門內的薪資排名，並取出各部門中薪資的第一名.
 
 
 ### ✔ 主要技巧
 - Window Function
-- PARTITION BY d.name: 部門內分組
-- ORDER BY e.salary DESC: 依據薪資排序
-- an.rank = 1: 取第一名
-- 若同部門有 多人並列最高薪 --> 全部列出
+- `PARTITION BY d.name`: 部門內分組
+- `ORDER BY e.salary DESC`: 依據薪資排序
+- `an.rank = 1`: 取第一名
+- 若同部門有多人並列最高薪 -> 全部列出
 
 ### ✔ Time Complexity: $O(N * \log{N})$
-where N is the number of row of the Employee table.
+where $N$ is the number of row of the Employee table.
 
 ### ✔ Space Complexity: $O(N)$
-where N is the number of row of the Employee table.
+where $N$ is the number of row of the Employee table.
 
 ---
 
-# ✅ 解法 2：最佳化解(利用 NOT EXISTS)
+# ✅ 解法 2：最佳化解(利用 `NOT EXISTS`)
 
 ### ✔ 思路
 找「不存在同部門、薪資比我更高的人」的員工
 
  
 ### ✔ 主要技巧
-- NOT EXISTS: 使用時機在於 - 沒有 / 不存在 / never / without
-- JOIN
+- `NOT EXISTS`: 使用時機在於 - 沒有 / 不存在 / never / without
+- `JOIN`
 
 ### ✔ Time Complexity: $O(N ^ 2)$ if without index, $O(N * \log{N})$ if with index.
-where N is the number of row of the Employee table.
+where $N$ is the number of row of the Employee table.
 
 ### ✔ Space Complexity: $O(1)$
 

@@ -1,5 +1,4 @@
 -- MySQL Solution for Monthly Transactions I
-
 /* Approach 1 */
 SELECT
     LEFT(trans_date, 7) AS month,

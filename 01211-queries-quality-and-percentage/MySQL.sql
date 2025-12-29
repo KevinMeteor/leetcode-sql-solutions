@@ -1,5 +1,4 @@
--- MySQL Solution for User Activity
-
+-- MySQL Solution for Queries Quality and Percentage
 /* Approach 1 */
 SELECT
     query_name,
@@ -17,7 +16,6 @@ FROM (
 ) AS q
 GROUP BY query_name;
 
-
 /* Approach 2-1 */
 SELECT q.query_name,
        ROUND(
@@ -29,9 +27,7 @@ SELECT q.query_name,
             2
         ) AS poor_query_percentage
 FROM Queries as q
-GROUP BY q.query_name
-
-
+GROUP BY q.query_name;
 
 /* Approach 2-2 */
 SELECT

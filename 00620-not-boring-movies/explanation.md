@@ -1,4 +1,3 @@
-
 # Not Boring Movies
 
 ## 🔍 Problem Summary
@@ -36,7 +35,7 @@ where $M$ is the number of rows that match the filter criteria. The result set s
 - MOD (P.S. MySQL 有 MOD function，但 MS-SQL 沒有)
 - `ORDER BY (DESC)`
 
-### ✔ Time Complexity:$O(N * \log{N})$ 
+### ✔ Time Complexity: $O(N * \log{N})$ 
 where $N$ is the number of rows. The filtering operations are $O(N)$, but the sorting operation dominates with $O(N * \log{N})$ complexity.
 
 ### ✔ Space Complexity: $O(M)$

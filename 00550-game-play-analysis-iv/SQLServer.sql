@@ -1,17 +1,17 @@
 -- SQL Server (T-SQL) Solution for Game Play Analysis IV
 /* Approach 1 */
 WITH ft AS(
-SELECT player_id, 
-       MIN(event_date) AS first_login
-FROM Activity
-GROUP BY player_id
-),
+    SELECT player_id, 
+        MIN(event_date) AS first_login
+    FROM Activity
+    GROUP BY player_id
+),  -- # 第二項不用再加 WITH
 next_day AS(
-SELECT f.player_id
-FROM ft AS f
-INNER JOIN Activity AS a
-ON f.player_id = a.player_id
-AND DATEDIFF(DAY, f.first_login, a.event_date) = 1
+    SELECT f.player_id
+    FROM ft AS f
+    INNER JOIN Activity AS a
+    ON f.player_id = a.player_id
+    AND DATEDIFF(DAY, f.first_login, a.event_date) = 1
 )
 
 SELECT 

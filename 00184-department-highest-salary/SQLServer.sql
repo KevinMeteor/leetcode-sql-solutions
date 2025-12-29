@@ -12,7 +12,6 @@ FROM(
 ) AS an
 WHERE an.rank =1;
 
-
 /* Approch 2 */
 SELECT
     

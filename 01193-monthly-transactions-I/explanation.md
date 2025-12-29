@@ -1,4 +1,3 @@
-
 # Monthly Transactions I
 
 ## 🔍 Problem Summary
@@ -9,7 +8,7 @@ Return the result table in any order.
 
 ---
 
-# ✅ 解法 1：Count / Sum transaction by group (month, country).
+# ✅ 解法 1：`Count` / `Sum` transaction by group (month, country).
 
 ### ✔ 思路
 1. Convert each transaction date into a 'YYYY-MM' format to represent the month.
@@ -18,16 +17,16 @@ Return the result table in any order.
 4. Sum solely approved transactions amounts using CASE WHEN or IF expansion.
 
 ### ✔ 主要技巧
-- Conditional aggregation: SUM(CASE WHEN ... THEN value ELSE 0 END) rather than COUNT
-- GROUP BY
-- FORMAT 轉換: CONVERT()
+- Conditional aggregation: `SUM(CASE WHEN ... THEN value ELSE 0 END)` rather than `COUNT`
+- `GROUP BY`
+- FORMAT 轉換: `CONVERT()`
 
 
-### ✔ Time Complexity: O(N) 
-where N is the number of rows in the Transactions table.
+### ✔ Time Complexity: $O(N)$
+where $N$ is the number of rows in the Transactions table.
 
-### ✔ Space Complexity: O(M)
-where M is the number of unique (month, country) pairs..
+### ✔ Space Complexity: $O(M)$
+where $M$ is the number of unique (month, country) pairs..
 
 ---
 
@@ -48,9 +47,9 @@ where U is daily unique users. -->
  
 # 🧠 思想誤區
 - MySQL & MSSQL 對照說明
-1. LEFT(trans_date, 7) <--> CONVERT(char(7), trans_date, 120)
-2. IF(condition, 1, 0) <--> CASE WHEN
-3. SUM(CASE WHEN state = 'approved' THEN amount ELSE 0 END)
+1. `LEFT(trans_date, 7)` <--> `CONVERT(char(7), trans_date, 120)`
+2. `IF(condition, 1, 0)` <--> `CASE WHEN`
+3. `SUM(CASE WHEN state = 'approved' THEN amount ELSE 0 END)`
 
 ---
 
@@ -60,4 +59,4 @@ where U is daily unique users. -->
 3. Can you rewrite using window functions?
 4. How does the query planner optimize this case? -->
 
---- -->
+<!-- --- --> 

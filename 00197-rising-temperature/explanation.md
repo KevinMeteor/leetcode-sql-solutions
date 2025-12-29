@@ -77,7 +77,7 @@ WHERE EXISTS (
 where $N$ is the number of row of Weather table.
 
 ### ✔ Space Complexity: $O(1)$
-for EXISTS function.
+for `EXISTS` function.
 
 
 ---

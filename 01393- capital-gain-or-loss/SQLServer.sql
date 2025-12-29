@@ -8,8 +8,7 @@ SELECT stock_name,
         END
     ) AS capital_gain_loss
 FROM Stocks
-GROUP BY stock_name
-
+GROUP BY stock_name;
 
 /* Approach 2 */
 SELECT

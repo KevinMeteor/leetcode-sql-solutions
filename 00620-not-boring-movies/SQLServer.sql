@@ -1,5 +1,5 @@
 -- SQL Server (T-SQL) Solution for Not Boring Moives
-/*  Approach  1 */
+/* Approach 1 */
 SELECT *
 FROM Cinema AS c
 WHERE c.description <> 'boring'

@@ -1,6 +1,5 @@
 -- SQL Server (T-SQL) Solution for Restaurant Growth
-Approach 1: Self JOIN (SQL Server)
-
+/* Approach 1: Self JOIN (SQL Server) */
 WITH daily AS (
     SELECT
         visited_on,
@@ -20,9 +19,7 @@ GROUP BY d1.visited_on
 HAVING COUNT(*) = 7
 ORDER BY d1.visited_on;
 
-
--- Approach 3: Window Function (ROWS-based) - SQL Server
-
+/* Approach 3: Window Function (ROWS-based) - SQL Server */
 WITH daily AS (
     SELECT
         visited_on,

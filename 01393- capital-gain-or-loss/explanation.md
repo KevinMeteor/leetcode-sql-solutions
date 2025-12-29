@@ -1,15 +1,11 @@
-
 # Capital Gain/Loss
 
-
 ## 🔍 Problem Summary
-(stock_name, operation_day) is the primary key (combination of columns with unique values) for this table.
-The operation column is an ENUM (category) of type ('Sell', 'Buy').
+(`stock_name`, `operation_day`) is the primary key (combination of columns with unique values) for this table.The operation column is an ENUM (category) of type ('Sell', 'Buy').
 
 Each row of this table indicates that the stock which has stock_name had an operation on the day operation_day with the price.
 It is guaranteed that each 'Sell' operation for a stock has a corresponding 'Buy' operation in a previous day. It is also guaranteed that each 'Buy' operation for a stock has a corresponding 'Sell' operation in an upcoming day.
  
-
 Write a solution to report the Capital gain/loss for each stock.
 
 The Capital gain/loss of a stock is the total gain or loss after buying and selling the stock one or many times.
@@ -31,18 +27,18 @@ Using signed aggregation by mapping Buy operations to negative prices and Sell o
 
 
 ### ✔ 主要技巧
-- Conditional aggregation: SUM(CASE WHEN ... THEN value ELSE 0 END) or IF()
-- GROUP BY
+- Conditional aggregation: `SUM(CASE WHEN ... THEN value ELSE 0 END)` or `IF()`
+- `GROUP BY`
 
-### ✔ Time Complexity: O(N) 
-where N is the number of rows in the Stocks table.
+### ✔ Time Complexity: $O(N)$
+where $N$ is the number of rows in the Stocks table.
 
-### ✔ Space Complexity: O(S)
-where S is the number of the unique stock_name.
+### ✔ Space Complexity: $O(S)$
+where $S$ is the number of the unique `stock_name`.
 
 ---
 
-# ✅ 解法 2：UNION ALL
+# ✅ 解法 2：`UNION ALL`
 
 ### ✔ 思路
 分別分出兩種交易 Sell & Buy 的表，並 Union 起來成為新的表，
@@ -53,13 +49,13 @@ where S is the number of the unique stock_name.
 3. SUM(new_price)
 
 ### ✔ 主要技巧
-- UNION ALL
+- `UNION ALL`
 
-### ✔ Time Complexity: O(N) 
-where N is the number of rows in the Stocks table.
+### ✔ Time Complexity: $O(N)$
+where $N$ is the number of rows in the Stocks table.
 
-### ✔ Space Complexity: O(N) 
-where N is the number of rows in the new table after UNION ALL.
+### ✔ Space Complexity: $O(N)$
+where $N$ is the number of rows in the new table after `UNION ALL`.
 
 ---
 

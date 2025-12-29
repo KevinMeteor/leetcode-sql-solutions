@@ -67,7 +67,7 @@ HAVING COUNT(e2.managerId) >= 5
 若有 index -> $O(N)$
 若無 index -> Nested loop -> $O(N^2)$
 
-GROUP BY：$O(N)$
+GROUP BY： $O(N)$
 
 ### ✔ Space Complexity: $O(N)$ 
 
@@ -95,11 +95,11 @@ JOIN
 ---
 
 ### ✔ Time Complexity: $O(N)$ or $O(N^2)$
-子查詢 GROUP BY：$O(N)$
+子查詢 GROUP BY： $O(N)$
 
 `JOIN`:
-若有 index -> $O(N)$
-若無 index -> Nested loop → $O(N^2)$
+若有 index ->  $O(N)$
+若無 index -> Nested loop →  $O(N^2)$
 
 
 
