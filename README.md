@@ -88,3 +88,96 @@ This portfolio is designed to reflect how SQL is actually used in Data Analyst r
 ---
 
 ## 📁 Folder Structure
+leetcode-sql-solutions-main/
+│
+├─ README.md                        
+├─ .gitignore
+├─ .git
+├─ .vscode/                       
+│
+├─ 01_basic_select_join/
+│   ├─ README.md
+│   ├─ 00175-combine-two-tables/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   ├─ 00178-rank-scores/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   ├─ 00181-employees-earning-more-than-their-managers/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   ├─ 00570-managers-with-at-least-5-direct-reports/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   └─ 00620-not-boring-movies/
+│       ├─ explanation.md
+│       ├─ MySQL.sql
+│       └─ SQLServer.sql
+│
+├─ 02_aggregation_groupby/
+│   ├─ README.md
+│   ├─ 00176-second-highest-salary/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   ├─ 01193-monthly-transactions-i/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   ├─ 01211-queries-quality-and-percentage/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   └─ 01393-capital-gain-or-loss/
+│       ├─ explanation.md
+│       ├─ MySQL.sql
+│       └─ SQLServer.sql
+│
+├─ 03_subquery_anti_join/
+│   ├─ README.md
+│   └─ 00183-customers-who-never-order/
+│       ├─ explanation.md
+│       ├─ MySQL.sql
+│       └─ SQLServer.sql
+│
+├─ 04_window_functions/
+│   ├─ README.md
+│   ├─ 00184-department-highest-salary/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   ├─ 00185-department-top-three-salaries/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   ├─ 00550-game-play-analysis-iv/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   └─ 01141-user-activity/
+│       ├─ explanation.md
+│       ├─ MySQL.sql
+│       └─ SQLServer.sql
+│
+├─ 05_time_series_analysis/
+│   ├─ README.md
+│   ├─ 00197-rising-temperature/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   ├─ 00511-game-play-analysis-i/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   ├─ 01174-immediate-food-delivery-ii/
+│   │   ├─ explanation.md
+│   │   ├─ MySQL.sql
+│   │   └─ SQLServer.sql
+│   └─ 01321-restaurant-growth/
+│       ├─ explanation.md
+│       ├─ MySQL.sql
+│       └─ SQLServer.sql
