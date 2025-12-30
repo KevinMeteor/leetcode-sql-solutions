@@ -116,4 +116,23 @@ the focus is on **how problems are approached and communicated**.
 
 ---
 
+
 📌 **This repository is actively maintained and intended for interview discussion.**
+
+---
+
+This portfolio is prepared for:
+- Data Analyst
+- Business Intelligence Analyst
+- Analytics Engineer
+- Entry / Mid-level Data Scientist (SQL-heavy roles)
+
+---
+
+## 📬 About Me
+
+- Background: Statistics / Finance / Cost Analysis
+- Interested in: Data analytics, business insights, SQL optimization
+- GitHub: https://github.com/KevinMeteor
+
+

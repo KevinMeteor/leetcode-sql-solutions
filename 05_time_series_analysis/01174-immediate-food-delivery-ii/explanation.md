@@ -57,6 +57,13 @@ where $N$ is the number of row of the `Delivery` table.
 - `AVG(order_date = customer_pref_delivery_date)` -> MySQL 環境中 Boolean 會被隱式轉成 1 / 0，但在 MSSQL Boolean 不是數值，還是需要多一步驟使用 `CASE WNEN`.
 - `(customer_id, order_date) IN (...)` -> 將子查詢結果用集合(Set)方式比對，在 MySQL 環境中有支援，但在 MSSQL 不支援，且須事前確認 `(customer_id, order_date)` 唯一性.
 
+| Feature          | MySQL | SQL Server |
+|------             |------|------|
+| Window Functions | ✅ | ✅ |
+| Boolean in AVG   | ✅ | ❌ |
+| Tuple IN (`(a,b) IN`) | ✅ | ❌ |
+| NOT EXISTS        | ✅ | ✅ |
+
 ### ✔ Time Complexity: $O(N)$
 where $N$ is the number of row of the `Delivery` table.
 
