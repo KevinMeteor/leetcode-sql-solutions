@@ -71,7 +71,7 @@ where $C$ is the number of the unique `(customer_id, first_order_date)`, i.e. th
 - 不存在一筆更早的訂單屬於同一個 customer -> 第一筆訂單.
 
 ### ✔ 主要技巧
-- `NOT EXISTS(...AND d2.order_date < d1.order_date)` -> 
+- `NOT EXISTS(...AND d2.order_date < d1.order_date)` -> 求得第一筆訂單.
 
 ```
 WHERE NOT EXISTS (
